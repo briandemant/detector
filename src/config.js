@@ -16,13 +16,13 @@ try {
 	console.error(er);
 	process.exit(1);
 }
-
-
-module.exports = config;
-
+ 
 if (!module.parent) {
-	// just show the configs
+	// if this file is executed directly then just show the config
 	console.log("Config for the '" + env + "' environment");
-	console.log(config);
+	console.log(JSON.stringify(config,null,2));
 	process.exit(0)
 }
+
+
+module.exports = config; 
