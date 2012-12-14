@@ -1,0 +1,7 @@
+.idea
+config/production.js
+config/dev.js
+node_modules/
+tmp
+logs
+.DS_Store
