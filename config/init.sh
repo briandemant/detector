@@ -14,12 +14,65 @@
 
 # uses 'forever' (https://github.com/nodejitsu/forever)
 
-ROOT=/var/services/detector
-PIDFILE=/var/run/detector.pid
-LOGFILE=/var/log/detector.log
-ERRFILE=/var/log/detector.errors.log
+# changes with service
+#===============================================================
+NAME=detector
+USER=web
 FORKS=12
 PORT="7101"
+COMMAND="src/server.js -f $FORKS -p $PORT"
+#===============================================================
 
-# callable with start, stop and restart
-forever $1 --pidFile $PIDFILE -a -l $LOGFILE -e $LOGFILE -o $LOGFILE -w --sourceDir $ROOT src/server.js -f $FORKS -p $PORT
+ROOT=/var/services/$NAME
+PIDFILE=/var/run/$NAME.pid
+LOGFILE=/var/log/$NAME.log 
+RETVAL=0
+
+service() {
+	echo $NAME  : $1 
+	forever $1 --pidFile $PIDFILE -a -l $LOGFILE -e $LOGFILE -o $LOGFILE -w --sourceDir $ROOT $COMMAND
+	RETVAL=$?
+}
+ 
+status() {
+	if [ ! -e /proc/$(cat $PIDFILE) ] ; then
+		echo "$NAME is stopped"
+		RETVAL=1
+	else
+		echo "$NAME is running"
+	fi
+}
+
+case "$1" in
+	start)
+		if [ ! -e /proc/$(cat $PIDFILE) ] ; then
+			service start
+			echo "$NAME has been started"
+		else
+			echo "$NAME was running"
+		fi
+		;;
+	stop)
+		if [ -e /proc/$(cat $PIDFILE) ] ; then 
+			service stop
+		else
+			echo "$NAME was not running"
+		fi
+		;;
+	status)
+		status
+		;;
+	restart)
+		if [ ! -e /proc/$(cat $PIDFILE) ] ; then
+			service start
+		else
+			service restart
+		fi
+		status
+		;;
+	*)
+		echo "Usage:  {start|stop|status|restart}"
+		exit 1
+		;;
+esac
+exit $RETVAL
