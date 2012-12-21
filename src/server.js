@@ -50,13 +50,13 @@ if (cluster.isMaster) {
 		if (cluster.worker.id == 1) {
 			process.stdout.write("Server listening on port " + port + "\n");
 		}
-		process.nextTick(function () {
+		setTimeout(function () {
 			process.stdout.write(".");
 			if (cluster.worker.id == forks) {
-				process.nextTick(function () {
+				setTimeout(function () {
 					process.stdout.write(" ready\n");
-				})
+				}, 200);
 			}
-		})
+		}, 100)
 	});
 }
