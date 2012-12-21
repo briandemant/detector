@@ -21,5 +21,5 @@ ERRFILE=/var/log/detector.errors.log
 FORKS=12
 PORT="7101"
 
-
+# callable with start, stop and restart
 forever $1 --pidFile $PIDFILE -a -l $LOGFILE -e $LOGFILE -o $LOGFILE -w --sourceDir $ROOT src/server.js -f $FORKS -p $PORT
