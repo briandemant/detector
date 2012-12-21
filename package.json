@@ -1,41 +1,42 @@
 {
-	"name"                : "detector",
-	"version"             : "0.1.0",
-	"description"         : "Useragent detection",
-	"keywords"            : [
-		"useragent",
-		"service",
-		"server"
-	],
-	"author"              : "Brian Demant <brian.demant@gmail.com> (http://briandemant.dk)",
-	"contributors"        : [
-		{
-			"name" : "Brian Demant",
-			"email": "brian.demant@gmail.com"
-		}
-	],
-	"repository"          : "git@git.fmadserving.dk:node/detector.git",
-	"license"             : "http://www.apache.org/licenses/LICENSE-2.0.html",
-	"main"                : "index.js",
-	"scripts"             : {
-		"index": "node index.js",
-		"test" : "./node_modules/mocha/bin/mocha",
-		"docs" : "./node_modules/docco/bin/docco src/*.js"
-	},
-	"bin"                 : {
-		"http-server": "./bin/http-server"
-	},
-	"dependencies"        : {
-		"lodash" : "~1.0.0-rc.2", 
-		"express": "~3.0.5"
-	},
-	"devDependencies"     : {
-		"chai"     : "~1.4.0",
-		"mocha"    : "~1.7.4",
-		"microtime": "~0.3.3",
-		"docco"    : "~0.4.0"
-	},
-	"optionalDependencies": {
-		"csv": "~0.2.4"
-	}
+  "name": "detector",
+  "version": "0.1.0",
+  "description": "Useragent detection",
+  "keywords": [
+    "useragent",
+    "service",
+    "server"
+  ],
+  "author": "Brian Demant <brian.demant@gmail.com> (http://briandemant.dk)",
+  "contributors": [
+    {
+      "name": "Brian Demant",
+      "email": "brian.demant@gmail.com"
+    }
+  ],
+  "repository": "git@git.fmadserving.dk:node/detector.git",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0.html",
+  "main": "index.js",
+  "scripts": {
+    "index": "node index.js",
+    "test": "./node_modules/mocha/bin/mocha",
+    "docs": "./node_modules/docco/bin/docco src/*.js"
+  },
+  "bin": {
+    "http-server": "./bin/http-server"
+  },
+  "dependencies": {
+    "lodash": "~1.0.0-rc.2",
+    "express": "~3.0.5",
+    "optimist": "~0.3.5"
+  },
+  "devDependencies": {
+    "chai": "~1.4.0",
+    "mocha": "~1.7.4",
+    "microtime": "~0.3.3",
+    "docco": "~0.4.0"
+  },
+  "optionalDependencies": {
+    "csv": "~0.2.4"
+  }
 }
