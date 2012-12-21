@@ -13,50 +13,55 @@ describe('basic api of ua_parser.js', function () {
 			assert.isFunction(uaParser.parse);
 		});
 
-		it('should fail on missing input', function (done) {
+		it('should fail on missing input', function () {
 			var uaParser = new UaParser();
-			var promise = uaParser.parse();
+			var result = uaParser.parse();
 
-			promise.then(function () {
-				done(new Error("should not call then"));
-			}, function (msg) {
-				if (msg === "User agent must be supplied") {
-					done();
-				}
-				else {
-					done(new Error("msg is not as espected : '" + msg + "'"));
-				}
-			});
-		});
-		it('should fail on empty input', function (done) {
-			var uaParser = new UaParser();
-			var promise = uaParser.parse("");
-
-			promise.then(function () {
-				done(new Error("should not call then"));
-			}, function (msg) {
-				if (msg === "User agent must be supplied") {
-					done();
-				}
-				else {
-					done(new Error("msg is not as espected : '" + msg + "'"));
-				}
-			});
+			assert.equal(result.err, "User agent must be supplied");
 		});
 
-		it('should resolve on input', function (done) {
+		it('should fail on empty input', function () {
 			var uaParser = new UaParser();
-			var promise = uaParser.parse("something");
+			var result = uaParser.parse("");
 
-			promise.then(function (ua) {
-				if (ua instanceof UserAgent) {
-					done();
-				} else {
-					done(new Error("should provide an unknown UserAgent object"));
-				}
-			}, function (msg) {
-				done(new Error("should not call error : " + msg));
-			});
+			assert.equal(result.err, "User agent must be supplied");
 		});
+
+		it('should resolve on input', function () {
+			var uaParser = new UaParser();
+			var result = uaParser.parse("something");
+
+			assert.notProperty("err", result);
+		});
+	});
+
+	describe('os fixtures', function () {
+		it('should detect all correctly', function (done) {
+			var uaParser = new UaParser();
+			var items = require('./fixtures/fixtures_head.json');
+
+			var stat = {browsers: {}, os: {}};
+			['tablet', 'desktop', 'mobile', 'spider'].forEach(function (section) {
+				stat[section] = {count: 0, impressions: 0};
+			})
+			var res = assert.fasterThan({items: items, timeout: 500, hz: 1500}, function (data) {
+				var result = uaParser.parse(data['useragent']);
+				assert.notProperty(result, "err", "failed on " + data['useragent']);
+				['tablet', 'desktop', 'mobile', 'spider'].forEach(function (section) {
+					if (result.is[section]) {
+						stat[section].count++;
+						stat[section].impressions += data.count;
+					}
+				})
+				stat.browsers[result.browser.family] = (stat.browsers[result.browser.family] | 0) + 1;
+				stat.os[result.os.family] = (stat.os[result.os.family] | 0) + 1;
+			})
+
+			console.dir(res);
+			console.dir(stat);
+
+			done();
+		});
+
 	});
 });

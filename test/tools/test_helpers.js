@@ -21,10 +21,23 @@ assert.isSameUA = function (ua, expected) {
 	          });
 };
 
+/**
+ * items (optional) : list of items to iterate on .. the fn is called with each item until timeout
+ *                  : if the list is exchausted
+ * timeout          : max running time .. does not fail the test but limits the running time of the test
+ * hz               : the expected minimum freq of the iteration starts over
+ *
+ * usage:
+ var res = assert.fasterThan({items: os, timeout: 2000, hz: 1000}, function (data) {
+				var result = uaParser.parse(data['useragent']);
+				assert.notProperty(result, "err", "failed on " + data['useragent']);
+			})
+ */
 assert.fasterThan = function (options, fn) {
 	var count = 0;
 	var start = microtime.now();
-	var end = microtime.now() + options.timeout * 1000;
+	var end = start + options.timeout * 1000;
+ 
 	while (end > microtime.now()) {
 		if (options.items) {
 			for (var i = options.items.length; i--;) {
@@ -45,6 +58,7 @@ assert.fasterThan = function (options, fn) {
 	}
 
 	var duration = microtime.now() - start;
+	console.log(duration);
 	var result = {
 		count   : count,
 		duration: (duration / 100 | 0) / 10,
