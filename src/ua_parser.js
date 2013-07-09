@@ -55,8 +55,8 @@ UAParser.prototype.parse = function (agent) {
 			if (result) {
 				ua.os.name = result.name;
 				ua.os.family = result.family;
-				ua.os.fullname = result.fullname;
-				//ua.os.version = result.version;
+//				ua.os.fullname = result.fullname;
+				ua.os.version = result.version;
 				ua.is = _.assign(ua.is, result.is);
 				return true;
 			}

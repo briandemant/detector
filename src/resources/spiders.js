@@ -5,7 +5,7 @@ var list = [];
 
 function make(family, osRegEx) {
 	list.push({ detect: function (ua) {
-		          var match = new RegExp(osRegEx).exec(ua.uaOriginal);
+		          var match = new RegExp(osRegEx).exec(ua.useragent);
 		          if (match) {
 			          var version = ('' + match[1]).trim();
 			          return {

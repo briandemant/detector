@@ -5,7 +5,7 @@ var list = [];
 var browser = {};
 function make(family, osRegEx, fn) {
 	list.push({ detect: function (ua) {
-		var match = new RegExp(osRegEx).exec(ua.uaOriginal);
+		var match = new RegExp(osRegEx).exec(ua.useragent);
 		if (match) {
 			if (fn) {
 				return fn(family, match, ua);
@@ -26,7 +26,7 @@ function isChrome(family, match, ua) {
 	var name = family;
 	if (ua.is.mobile || ua.is.tablet) {
 		name = "Chrome Mobile";
-	} else if (ua.uaOriginal.indexOf('CriOS') !== -1) {
+	} else if (ua.useragent.indexOf('CriOS') !== -1) {
 		ua.is.mobile = true;
 		ua.is.desktop = false;
 	}
@@ -76,21 +76,21 @@ function isSilk(family, match, ua) {
 	}
 }
 
-var webkitVersion = new RegExp('Version/(\\d+)');
+var webkitVersion = new RegExp('Version/(\\d+(.\\d)?)');
 var notSafari = new RegExp('RIM Tablet OS|Android|Silk');
 function isSafari(family, match, ua) {
 	var name = family;
 	var version = "";
 	var fullname = name;
 
-	if (notSafari.exec(ua.uaOriginal)) {
+	if (notSafari.exec(ua.useragent)) {
 		return;
 	}
 
 	if (ua.is.mobile || ua.is.tablet) {
 		name = "Mobile Safari";
 	}
-	var webkitV = webkitVersion.exec(ua.uaOriginal);
+	var webkitV = webkitVersion.exec(ua.useragent);
 	if (webkitV) {
 		version = webkitV[1];
 		fullname = name + " " + version;
@@ -113,7 +113,7 @@ function isAndroid(family, match, ua) {
 	var version = "";
 	var fullname = name;
 
-	var match = webkitVersion.exec(ua.uaOriginal);
+	var match = webkitVersion.exec(ua.useragent);
 	if (match) {
 		version = match[1]
 		fullname = name + " " + version;

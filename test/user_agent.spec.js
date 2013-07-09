@@ -5,9 +5,9 @@ var UserAgent = require("../src/user_agent.js");
 var _ = require('lodash');
 
 
-describe('user_agent.js', function () {
-	describe('defaults / unknown', function () {
-		it('default is unknown', function () {
+describe('user_agent.js', function() {
+	describe('defaults / unknown', function() {
+		it('default is unknown', function() {
 			var ua = new UserAgent("does not compute");
 			assert(ua.is.unknown, "is unknown");
 			assert(!ua.is.desktop, "not desktop");

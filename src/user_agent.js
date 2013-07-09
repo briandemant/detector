@@ -2,8 +2,8 @@
 
 var UNKNOWN = "Unknown";
 // the UserAgent is unidentified by default
-function UserAgent(uaOriginal) {
-	this.uaOriginal = uaOriginal;
+function UserAgent(useragent) {
+	this.useragent = useragent;
 	// safe defaults 
 	this.browser = {family: UNKNOWN, name: UNKNOWN};
 	this.os = {family: UNKNOWN, name: UNKNOWN};

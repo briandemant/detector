@@ -4,7 +4,7 @@ var _ = require('lodash');
 var list = [];
 function make(family, is, osRegEx, fn) {
 	list.push({ detect: function (ua) {
-		var match = new RegExp(osRegEx).exec(ua.uaOriginal);
+		var match = new RegExp(osRegEx).exec(ua.useragent);
 		if (match) {
 			if (fn) {
 				return fn(family, is, match, ua);
@@ -27,7 +27,7 @@ function isAppleGadget(family, is, match) {
 	return {
 		name  : family,
 		family: family,
-		//version: match[1],
+		version: match[1],
 		is    : is
 	}
 }
@@ -65,7 +65,7 @@ function isAndroid(family, is, match, ua) {
 
 	// https://developers.google.com/chrome/mobile/docs/user-agent
 	var is = mobile;
-	if (ua.uaOriginal.indexOf("Mobile") === -1) {
+	if (ua.useragent.indexOf("Mobile") === -1) {
 		is = tablet;
 	}
 
@@ -96,13 +96,13 @@ var notWindows = new RegExp("(xbox)", "i");
 function isWindows(family, is, match, ua) {
 	var version = match[1];
 
-	if (!winMap[version] || notWindows.exec(ua.uaOriginal)) {
+	if (!winMap[version] || notWindows.exec(ua.useragent)) {
 		//console.dir(match);
 		//process.exit();
 		return false;
 	}
 	var is = desktop;
-	if (winPhone.exec(ua.uaOriginal)) {
+	if (winPhone.exec(ua.useragent)) {
 		is = mobile;
 		if (version === 'NT 6.1') {
 			version = 'Phone OS 7.5';
@@ -112,8 +112,9 @@ function isWindows(family, is, match, ua) {
 
 	return {
 		name    : family + " " + winMap[version],
-		fullname: family + " " + winMap[version],
+//		fullname: family + " " + winMap[version],
 		family  : family,
+		version  : winMap[version],
 		is      : is
 	}
 }
@@ -126,12 +127,13 @@ var osxMap = {
 	";"   : ""
 }
 function isOSX(family, is, match) {
-	var version = match[1].replace('_', '.');
+	var version = match[1].replace('_', '.').trim();
+	var namedVersion = version;
 	if (osxMap[version]) {
-		version = osxMap[version];
+		namedVersion = osxMap[version];
 	}
 	return {
-		name   : family + " " + version,
+		name   : family + " " + namedVersion,
 		family : family,
 		version: version,
 		is     : desktop
@@ -143,13 +145,13 @@ var linuxMap = new RegExp("(ubuntu)", "i");
 
 function isLinux(family, is, match, ua) {
 	var name = family;
-	var match = linuxMap.exec(ua.uaOriginal);
+	var match = linuxMap.exec(ua.useragent);
 	if (match) {
 		name = match[1];
 	}
 	return {
 		name    : name,
-		fullname: family,
+//		fullname: family,
 		family  : family,
 		is      : mobile
 	}
@@ -173,7 +175,7 @@ function isA(kind) {
 make("Windows", null, /Windows ((?:NT|Phone(?: OS)?) \d+(?:\.\d+)?)/, isWindows);
 
 make("iOS", tablet, /iPad;(?: U;)? CPU OS (\d+)/, isAppleGadget);
-make("iOS", mobile, /i(?:Phone|Pod);(?: U;)?( CPU (?:iPhone)? OS (\d+))?/, isAppleGadget);
+make("iOS", mobile, /i(?:Phone|Pod);(?: U;)?(?: CPU (?:iPhone)? OS (\d+))?/, isAppleGadget);
 
 make("OS X", desktop, /OS X( 10.\d+|;)/, isOSX);
 make("Android", null, /Android(?: (\d+\.\d+))?/, isAndroid);

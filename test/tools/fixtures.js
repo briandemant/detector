@@ -8,12 +8,12 @@ var spiders = [];
 
 var browsers = [
 	{
-		original: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:2.0.1) Gecko/20100101 Firefox/4.0.1',
+		useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:2.0.1) Gecko/20100101 Firefox/4.0.1',
 		browser : {family: 'Firefox', version: "4.0.1" },
 		os      : {family: 'Mac OS X', version: "10.5" },
 		is      : {unknown: false, browser: true}   },
 	{
-		original: 'Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.1.7) Gecko/20100106 Ubuntu/9.10 (karmic) Firefox/3.5.7',
+		useragent: 'Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.1.7) Gecko/20100106 Ubuntu/9.10 (karmic) Firefox/3.5.7',
 		browser : {family: 'Firefox', version: "3.5.7"},
 		os      : {family: 'Ubuntu', version: '9.10'},
 		is      : {unknown: false, browser: true}   }
@@ -21,7 +21,7 @@ var browsers = [
 
 var tablets = [
 	{
-		original: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:2.0.1) Gecko/20100101 Firefox/4.0.2',
+		useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:2.0.1) Gecko/20100101 Firefox/4.0.2',
 		browser : {family: 'Firefox', version: "4.0.2" },
 		os      : {family: 'Mac OS X', version: "10.5" },
 		is      : {unknown: false, browser: true}   }
