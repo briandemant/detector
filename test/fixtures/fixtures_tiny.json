@@ -1,0 +1,233 @@
+[
+  {
+    "useragent": "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)",
+    "count": 16112488,
+    "browser": {
+      "family": "IE",
+      "name": "IE 9.0",
+      "version": "9.0"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows 7"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11",
+    "count": 11811156,
+    "browser": {
+      "family": "Chrome",
+      "name": "Chrome 23.0.1271.97",
+      "version": "23.0.1271.97"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows 7"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)",
+    "count": 5902916,
+    "browser": {
+      "family": "IE",
+      "name": "IE 9.0",
+      "version": "9.0"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows 7"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (iPad; CPU OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A523 Safari/8536.25",
+    "count": 5351505,
+    "browser": {
+      "family": "Mobile Safari",
+      "name": "Mobile Safari 6.0",
+      "version": "6.0"
+    },
+    "os": {
+      "family": "iOS",
+      "name": "iOS 6"
+    },
+    "is": {
+      "type": "Mobile Browser",
+      "desktop": false,
+      "mobile": false,
+      "tablet": true,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)",
+    "count": 4500234,
+    "browser": {
+      "family": "IE",
+      "name": "IE 9.0",
+      "version": "9.0"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows Vista"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0",
+    "count": 3555203,
+    "browser": {
+      "family": "Firefox",
+      "name": "Firefox 17.0",
+      "version": "17.0"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows 7"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11",
+    "count": 3525327,
+    "browser": {
+      "family": "Chrome",
+      "name": "Chrome 23.0.1271.97",
+      "version": "23.0.1271.97"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows XP"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11",
+    "count": 3343726,
+    "browser": {
+      "family": "Chrome",
+      "name": "Chrome 23.0.1271.97",
+      "version": "23.0.1271.97"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows 7"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11",
+    "count": 3056106,
+    "browser": {
+      "family": "Chrome",
+      "name": "Chrome 23.0.1271.97",
+      "version": "23.0.1271.97"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows Vista"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)",
+    "count": 2127177,
+    "browser": {
+      "family": "IE",
+      "name": "IE 9.0",
+      "version": "9.0"
+    },
+    "os": {
+      "family": "Windows",
+      "name": "Windows 7"
+    },
+    "is": {
+      "type": "Browser",
+      "desktop": true,
+      "mobile": false,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  },
+  {
+    "useragent": "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A523 Safari/8536.25",
+    "count": 1810882,
+    "browser": {
+      "family": "Mobile Safari",
+      "name": "Mobile Safari 6.0",
+      "version": "6.0 xxxx"
+    },
+    "os": {
+      "family": "iOS",
+      "name": "iOS 6"
+    },
+    "is": {
+      "type": "Mobile Browser",
+      "desktop": false,
+      "mobile": true,
+      "tablet": false,
+      "spider": false,
+      "unknown": false
+    }
+  }
+]

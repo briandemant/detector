@@ -51,7 +51,7 @@ UAParser.prototype.parse = function (agent) {
 	if (!ua.is.spider) {
 		// some stop on first true
 		os.some(function (matcher) {
-			var result = matcher.detect(ua);
+			var result = matcher.detect(ua); 
 			if (result) {
 				ua.os.name = result.name;
 				ua.os.family = result.family;

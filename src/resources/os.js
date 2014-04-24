@@ -4,6 +4,7 @@ var _ = require('lodash');
 var list = [];
 function make(family, is, osRegEx, fn) {
 	list.push({ detect: function (ua) {
+		
 		var match = new RegExp(osRegEx).exec(ua.useragent);
 		if (match) {
 			if (fn) {
@@ -15,7 +16,7 @@ function make(family, is, osRegEx, fn) {
 				is    : is
 			}
 		}
-	}
+	}, regex : osRegEx
 	          });
 }
 var desktop = {desktop: true};
@@ -88,6 +89,9 @@ var winMap = {
 	"NT 6.0"      : "Vista",
 	"NT 6.1"      : "7",
 	"NT 6.2"      : "8",
+	"NT 6.3"      : "8.1",
+	"NT 6.4"      : "??",
+	"NT 6.5"      : "??",
 	"Phone OS 7.5": "Phone 7",
 	"Phone 8.0"   : "Phone 8"
 }
