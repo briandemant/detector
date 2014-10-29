@@ -90,7 +90,7 @@ var winMap = {
 	"NT 6.1"      : "7",
 	"NT 6.2"      : "8",
 	"NT 6.3"      : "8.1",
-	"NT 6.4"      : "??",
+	"NT 6.4"      : "10",
 	"NT 6.5"      : "??",
 	"Phone OS 7.5": "Phone 7",
 	"Phone 8.0"   : "Phone 8"
@@ -123,6 +123,8 @@ function isWindows(family, is, match, ua) {
 	}
 }
 var osxMap = {
+	"10.10": "10.10 Yosemite",
+	"10.9": "10.9 Mavericks",
 	"10.8": "10.8 Mountain Lion",
 	"10.7": "10.7 Lion",
 	"10.6": "10.6 Snow Leopard",
