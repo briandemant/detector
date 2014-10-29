@@ -78,6 +78,7 @@ function isAndroid(family, is, match, ua) {
 	}
 }
 
+// http://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions
 var winMap = {
 	"95"          : "95",
 	"ME"          : "ME",
