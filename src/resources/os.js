@@ -3,61 +3,62 @@ var _ = require('lodash');
 
 var list = [];
 function make(family, is, osRegEx, fn) {
-	list.push({ detect: function (ua) {
-		
-		var match = new RegExp(osRegEx).exec(ua.useragent);
-		if (match) {
-			if (fn) {
-				return fn(family, is, match, ua);
+	list.push({
+		detect   : function(ua) {
+
+			var match = new RegExp(osRegEx).exec(ua.useragent);
+			if (match) {
+				if (fn) {
+					return fn(family, is, match, ua);
+				}
+				return {
+					name   : family,
+					family : family,
+					is     : is
+				}
 			}
-			return {
-				name  : family,
-				family: family,
-				is    : is
-			}
-		}
-	}, regex : osRegEx
-	          });
+		}, regex : osRegEx
+	});
 }
-var desktop = {desktop: true};
-var tablet = {tablet: true};
-var mobile = {mobile: true};
+var desktop = {desktop : true};
+var tablet = {tablet : true};
+var mobile = {mobile : true};
 
 
 function isAppleGadget(family, is, match) {
 	return {
-		name  : family,
-		family: family,
-		version: match[1],
-		is    : is
+		name    : family,
+		family  : family,
+		version : match[1],
+		is      : is
 	}
 }
 
 //http://en.wikipedia.org/wiki/Android_version_history#Android_1.0
 var androidMap = {
-	"4.2": "4.2 Jelly Bean",
-	"4.1": "4.1.x Jelly Bean",
-	"4.0": "4.0.x Ice Cream Sandwich",
-	"3.2": "3.x Honeycomb",
-	"3.1": "3.x Honeycomb",
-	"3.0": "3.x Honeycomb",
-	"2.3": "2.3.x Gingerbread",
-	"2.2": "2.2.x Froyo",
-	"2.1": "2.0/1 Eclair",
-	"2.0": "2.0/1 Eclair",
-	"1.6": "1.6 Donut",
-	"1.5": "1.5 Cupcake",
-	"1.1": "1.1",
-	"1.0": "1.0"
+	"4.2" : "4.2 Jelly Bean",
+	"4.1" : "4.1.x Jelly Bean",
+	"4.0" : "4.0.x Ice Cream Sandwich",
+	"3.2" : "3.x Honeycomb",
+	"3.1" : "3.x Honeycomb",
+	"3.0" : "3.x Honeycomb",
+	"2.3" : "2.3.x Gingerbread",
+	"2.2" : "2.2.x Froyo",
+	"2.1" : "2.0/1 Eclair",
+	"2.0" : "2.0/1 Eclair",
+	"1.6" : "1.6 Donut",
+	"1.5" : "1.5 Cupcake",
+	"1.1" : "1.1",
+	"1.0" : "1.0"
 }
 function isAndroid(family, is, match, ua) {
 	var version = match[1];
 	if (_.isUndefined(version)) {
 		return {
 			//name  : "Generic " + family,
-			name  : family,
-			family: family,
-			is    : mobile
+			name   : family,
+			family : family,
+			is     : mobile
 		}
 	}
 	if (androidMap[version]) {
@@ -72,36 +73,40 @@ function isAndroid(family, is, match, ua) {
 
 
 	return {
-		name  : family + " " + version,
-		family: family,
-		is    : is
+		name   : family + " " + version,
+		family : family,
+		is     : is
 	}
 }
 
 // http://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions
 var winMap = {
-	"95"          : "95",
-	"ME"          : "ME",
-	"98"          : "98",
-	"NT 4.0"      : "NT",
-	"NT 5.0"      : "2000",
-	"NT 5.1"      : "XP",
-	"NT 5.2"      : "2003 Server",
-	"NT 6.0"      : "Vista",
-	"NT 6.1"      : "7",
-	"NT 6.2"      : "8",
-	"NT 6.3"      : "8.1",
-	"NT 6.4"      : "10",
-	"NT 6.5"      : "??",
-	"Phone OS 7.5": "Phone 7",
-	"Phone 8.0"   : "Phone 8"
+	"95"           : "95",
+	"ME"           : "ME",
+	"98"           : "98",
+	"NT 4.0"       : "NT",
+	"NT 5.0"       : "2000",
+	"NT 5.1"       : "XP",
+	"NT 5.2"       : "2003 Server",
+	"NT 6.0"       : "Vista",
+	"NT 6.1"       : "7",
+	"NT 6.2"       : "8",
+	"NT 6.3"       : "8.1",
+	"NT 10"        : "10",
+	"NT 11"        : "11",
+	"Phone OS 7.5" : "Phone 7",
+	"Phone 8.0"    : "Phone 8"
 }
 var winPhone = new RegExp("(Phone|ZuneWP7)", "i");
 var notWindows = new RegExp("(xbox)", "i");
+var newerWindows = new RegExp("NT (\\d{2})(.\\d+)?");
 function isWindows(family, is, match, ua) {
+
 	var version = match[1];
 
-	if (!winMap[version] || notWindows.exec(ua.useragent)) {
+	var newWindows = newerWindows.exec(version);
+
+	if ((!winMap[version] && !newWindows) || notWindows.exec(ua.useragent)) {
 		//console.dir(match);
 		//process.exit();
 		return false;
@@ -114,24 +119,26 @@ function isWindows(family, is, match, ua) {
 		}
 	}
 
-
+	var versionName = (newWindows) ? newWindows[1] : winMap[version]; 
+	
 	return {
-		name    : family + " " + winMap[version],
-//		fullname: family + " " + winMap[version],
+		name    : family + " " + versionName,
+		//		fullname: family + " " + winMap[version],
 		family  : family,
-		version  : winMap[version],
+		version : versionName,
 		is      : is
 	}
 }
 var osxMap = {
-	"10.10": "10.10 Yosemite",
-	"10.9": "10.9 Mavericks",
-	"10.8": "10.8 Mountain Lion",
-	"10.7": "10.7 Lion",
-	"10.6": "10.6 Snow Leopard",
-	"10.5": "10.5 Leopard",
-	"10.4": "10.4 Tiger",
-	";"   : ""
+	"10.11" : "10.11 El Capitan",
+	"10.10" : "10.10 Yosemite",
+	"10.9"  : "10.9 Mavericks",
+	"10.8"  : "10.8 Mountain Lion",
+	"10.7"  : "10.7 Lion",
+	"10.6"  : "10.6 Snow Leopard",
+	"10.5"  : "10.5 Leopard",
+	"10.4"  : "10.4 Tiger",
+	";"     : ""
 }
 function isOSX(family, is, match) {
 	var version = match[1].replace('_', '.').trim();
@@ -140,10 +147,10 @@ function isOSX(family, is, match) {
 		namedVersion = osxMap[version];
 	}
 	return {
-		name   : family + " " + namedVersion,
-		family : family,
-		version: version,
-		is     : desktop
+		name    : family + " " + namedVersion,
+		family  : family,
+		version : version,
+		is      : desktop
 	}
 }
 
@@ -157,23 +164,23 @@ function isLinux(family, is, match, ua) {
 		name = match[1];
 	}
 	return {
-		name    : name,
-//		fullname: family,
-		family  : family,
-		is      : mobile
+		name   : name,
+		//		fullname: family,
+		family : family,
+		is     : mobile
 	}
 }
 
 
 function isA(kind) {
-	return function (family) {
+	return function(family) {
 		var name = family;
 		var is = {};
 		is[kind] = true;
 		return {
-			name  : name,
-			family: family,
-			is    : is
+			name   : name,
+			family : family,
+			is     : is
 		}
 	}
 }
